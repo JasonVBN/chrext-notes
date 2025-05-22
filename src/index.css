@@ -1,4 +1,4 @@
-:root {
+/* :root {
   font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
   line-height: 1.5;
   font-weight: 400;
@@ -11,7 +11,7 @@
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-}
+} */
 
 a {
   font-weight: 500;
@@ -51,16 +51,12 @@ button {
 button:hover {
   border-color: #646cff;
 }
-button:focus,
-button:focus-visible {
-  outline: 4px auto -webkit-focus-ring-color;
-}
 
 button.remove-task {
-  color: #fff;
+  color: #dadada;
   background: none;
   border: none;
-  font-size: 1.2em;
+  font-size: 2em;
   font-weight: bold;
   cursor: pointer;
   margin-left: 0.5em;
@@ -69,6 +65,39 @@ button.remove-task {
 }
 button.remove-task:hover {
   color: #ff3333;
+}
+
+nav {
+  /* display: flex; */
+  width: 80vw;
+  box-sizing: border-box;
+  left: 0;
+  top: 0;
+  position: relative;
+  justify-content: center;
+  align-items: center;
+  gap: 2em;
+  padding: 1em 0;
+  border-bottom: 1px solid #444444;
+  margin-bottom: 2em;
+  background: rgb(0, 30, 180);
+}
+
+.navbtn {
+  background-color: #1a1a1a;
+  color: #fff;
+  border: none;
+  padding: 0.5em 1em;
+  font-size: 1.2em;
+  font-weight: bold;
+  cursor: pointer;
+  margin-right: 0.5em;
+  transition: background-color 0.2s, color 0.2s;
+}
+
+.navbtn:hover {
+  color: orange;
+  border: none;
 }
 
 /* Custom checkbox styles */
@@ -105,6 +134,27 @@ li input[type="checkbox"]:checked::after {
     border-width: 0 0.2em 0.2em 0;
     transform: rotate(45deg);
     display: block;
+}
+
+li.checked-task label {
+  text-decoration: line-through;
+  color: #888;
+}
+
+input[type="text"]#task_ipt {
+  padding: 0.7em 1em;
+  border: 2px solid #888;
+  border-radius: 8px;
+  font-size: 1.1em;
+  background: #eee;
+  color: #000;
+  margin: 0.5em 0.5em 0.5em 0;
+  outline: none;
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+input[type="text"]#task_ipt:focus {
+  border-color: #646cff;
+  box-shadow: 0 0 0 2px #646cff44;
 }
 
 @media (prefers-color-scheme: light) {

@@ -7,7 +7,6 @@ function App() {
     const [numTasks, setNumTasks] = useState(0);
     const [tasks, setTasks] = useState([]);
     const [checked, setChecked] = useState([]);
-    const [page, setPage] = useState('todo');
 
     useEffect(() => {
         chrome.storage.local.get('numTasks', function (result) {
@@ -91,7 +90,7 @@ function App() {
     const items = [];
     for (let i = 0; i < tasks.length; i++) {
         items.push(
-            <li key={`task_${i}`} style={{ listStyle: 'none', cursor: 'pointer' }}>
+            <li key={`task_${i}`} style={{ listStyle: 'none', cursor: 'pointer' }} className={checked[i] ? 'checked-task' : ''}>
 				<input
 					type="checkbox"
 					style={{ marginRight: '0.5em' }}
@@ -111,36 +110,22 @@ function App() {
         );
     }
 
+	const taskCountMessage = 
+		tasks.length == 0 ? 
+		<p>No tasks!</p> : 
+		<p>{`${tasks.length} task${tasks.length > 1 ? 's' : ''}:`}</p>;
+
     return (
-        <div>
-            <nav style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', gap: '2em', padding: '1em 0', borderBottom: '1px solid #444', marginBottom: '2em', background: '#222' }}>
-                <button
-                    style={{ background: page === 'todo' ? '#444' : 'none', color: 'orange', border: 'none', fontSize: '1.2em', padding: '0.5em 1.5em', cursor: 'pointer', borderRadius: '8px', fontWeight: 'bold' }}
-                    onClick={() => setPage('todo')}
-                >
-                    To-do list
-                </button>
-                <button
-                    style={{ background: page === 'notes' ? '#444' : 'none', color: 'orange', border: 'none', fontSize: '1.2em', padding: '0.5em 1.5em', cursor: 'pointer', borderRadius: '8px', fontWeight: 'bold' }}
-                    onClick={() => setPage('notes')}
-                >
-                    Notes
-                </button>
-            </nav>
-            {page === 'todo' ? (
-                <>
-                    <button onClick={clearTasks}>Clear All</button>
-                    <br />
-                    <input type="text" placeholder="new task" id='task_ipt' />
-                    <button onClick={addTask}>Add Task</button>
-                    <ul>
-                        {items}
-                    </ul>
-                </>
-            ) : (
-                <Notes />
-            )}
-        </div>
+        <>
+			<br />
+			<input type="text" placeholder="new task" id='task_ipt' />
+			<button onClick={addTask}>Add Task</button>
+			{taskCountMessage}
+			<ul>
+				{items}
+			</ul>
+			<button onClick={clearTasks}>Clear All</button>
+        </>
     );
 }
 
